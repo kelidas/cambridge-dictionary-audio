@@ -62,7 +62,7 @@ def define(word, save_path,f,printable,mode,
 
     soup = bs4.BeautifulSoup(page.content, "html.parser")
 
-    primal_block = soup.find_all("div", {'class': 'di-body'})
+    primal_block = soup.find_all("div", {'class': 'entry-body'})
 
     ans = ""
 
