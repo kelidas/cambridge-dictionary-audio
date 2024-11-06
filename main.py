@@ -1,3 +1,4 @@
+import platform
 import Parser
 import os, time
 import playsound
@@ -6,7 +7,14 @@ import combine
     
 native = "russian" # select your native language
 
-os.system('cls')
+def clear_terminal():
+    # Check for the OS and clear the terminal accordingly
+    if platform.system == 'Windows':  # For Windows
+        os.system('cls')
+    else:  # For macOS and Linux
+        os.system('clear')
+
+clear_terminal()
 playing = 1
 folder_path = os.getcwd()
 
@@ -46,13 +54,13 @@ def Start():
         word = word.replace(ele, "")
 
     if(len(word) == 0):
-        os.system('cls')
+        clear_terminal()
         Start()
 
     if word[0] == '/':
         commands(word)
 
-    os.system('cls')
+    clear_terminal()
     print(word)
     
     save_path = f"{folder_path}/{word}.mp3" #Generating of file name
