@@ -37,8 +37,11 @@ def comb(word):
 
             try:
                 Parser.define(element, save_path, 0, 0, 'english')
-            except:
-                pass
+            except KeyboardInterrupt:
+                # quit
+                sys.exit()
+            except Exception as err:
+                print(err)
 
             if os.path.exists(save_path):
                 raw_music.append(save_path)
@@ -52,7 +55,10 @@ def comb(word):
     for mp3_file in raw_music:
         try:
             os.remove(mp3_file)
-        except:
-            pass
+        except KeyboardInterrupt:
+            # quit
+            sys.exit()
+        except Exception as err:
+            print(err)
 
     return 1

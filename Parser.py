@@ -100,7 +100,11 @@ def define(word, save_path,f,printable,mode,
                         if printable:
                             print('\033[92mSucceful file downloaded to \033[92m\033[96m' + save_path+'\033[96m')
 
-                    except: pass
+                    except KeyboardInterrupt:
+                        # quit
+                        sys.exit()
+                    except Exception as err:
+                        print(err)
 
                 for def_and_sent_block in entity.find_all("div", {'class': 'def-block ddef_block'}):
                     found_definition_block = def_and_sent_block.find("div", {"class": "ddef_h"})
