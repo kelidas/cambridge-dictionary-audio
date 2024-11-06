@@ -18,41 +18,41 @@ def merge_and_normalize_audio(file_paths, output_path, delay_ms=1000):
 
     merged_audio = reference_audio
     for normalized_audio in normalized_audio_segments:
-    	merged_audio += normalized_audio
+        merged_audio += normalized_audio
         #merged_audio += silence_segment + normalized_audio
 
     merged_audio.export(output_path, format="mp3")
 
 def comb(word):
-	words = word.split()
-	folder_path = os.getcwd()
+    words = word.split()
+    folder_path = os.getcwd()
 
-	if len(words) < 2: return 0
-	print("\033[93mTrying a combining method\033[93m")
+    if len(words) < 2: return 0
+    print("\033[93mTrying a combining method\033[93m")
 
-	raw_music = []
-	with alive_bar(len(words)) as bar:
-		for element in words:
-			save_path = f"{folder_path}\\{element}.mp3"
+    raw_music = []
+    with alive_bar(len(words)) as bar:
+        for element in words:
+            save_path = f"{folder_path}\\{element}.mp3"
 
-			try:
-				Parser.define(element, save_path, 0, 0, 'english')
-			except:
-				pass
+            try:
+                Parser.define(element, save_path, 0, 0, 'english')
+            except:
+                pass
 
-			if os.path.exists(save_path):
-				raw_music.append(save_path)
+            if os.path.exists(save_path):
+                raw_music.append(save_path)
 
-			bar()
+            bar()
 
-	if len(raw_music) == 0: return 0
+    if len(raw_music) == 0: return 0
 
-	merge_and_normalize_audio(raw_music, word + ".mp3", 0)
+    merge_and_normalize_audio(raw_music, word + ".mp3", 0)
 
-	for mp3_file in raw_music:
-		try:
-			os.remove(mp3_file)
-		except:
-			pass
+    for mp3_file in raw_music:
+        try:
+            os.remove(mp3_file)
+        except:
+            pass
 
-	return 1
+    return 1
